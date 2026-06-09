@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Shared Workspace - Login</title>
+    <link rel="stylesheet" href="../Components/Structure_component_css/header.css">
+    <link rel="stylesheet" href="../Components/Structure_component_css/Footer.css">
+    <link rel="stylesheet" href="../structure_css/Login.css">
+</head>
+<body onload="loadHeader(); loadFooter();">
+
+    <div id="header"></div>
+
+    <main class="form-container">
+        <div class="account-card">
+            <h2>Welcome Back</h2>
+            <p class="subtitle">Log in to manage or find your ideal shared workspace.</p>
+            
+            <form id="loginForm">
+                <div class="form-group">
+                    <label for="loginEmail">Email Address</label>
+                    <input type="email" id="loginEmail" placeholder="john@example.com" required>
+                </div>
+                <div class="form-group">
+                    <label for="loginPassword">Password</label>
+                    <input type="password" id="loginPassword" placeholder="••••••••" required>
+                </div>
+
+                <div class="recovery-links-row">
+                    <a href="#" id="triggerForgotEmail">Forgot Email?</a>
+                    <a href="#" id="triggerForgotPassword">Forgot Password?</a>
+                </div>
+                
+                <button type="submit" class="submit-btn" id="loginSubmitBtn">Log In</button>
+                <div class="msg" id="loginResponseMsg"></div>
+            </form>
+            
+            <div class="card-footer">
+                <p>Don't have an account? <a href="./sign_up.html">Sign up here</a></p>
+            </div>
+        </div>
+    </main>
+
+    <div class="recovery-modal" id="forgotPasswordModal">
+        <div class="modal-content-card">
+            <span class="close-modal-btn" onclick="closeRecoveryModal('forgotPasswordModal')">&times;</span>
+            <h3>Recover Password</h3>
+            <p class="modal-instructions">Enter your email to load your account security question.</p>
+            
+            <div class="form-group">
+                <label>Your Registered Email</label>
+                <input type="email" id="recoveryEmailInput" placeholder="john@example.com">
+                <button type="button" class="modal-action-btn" id="loadQuestionBtn">Verify Email</button>
+            </div>
+
+            <div id="passwordQuestionWrapper" style="display: none; margin-top: 15px;">
+                <div class="form-group">
+                    <label>Security Question:</label>
+                    <p id="displayedPasswordQuestion" class="security-question-text"></p>
+                    <input type="text" id="passwordAnswerInput" placeholder="Your Answer">
+                </div>
+                <button type="button" class="submit-btn" id="submitPasswordRecoveryBtn">Reveal Password</button>
+            </div>
+            <div class="modal-msg" id="passwordRecoveryMsg"></div>
+        </div>
+    </div>
+
+    <div class="recovery-modal" id="forgotEmailModal">
+        <div class="modal-content-card">
+            <span class="close-modal-btn" onclick="closeRecoveryModal('forgotEmailModal')">&times;</span>
+            <h3>Recover Email Address</h3>
+            <p class="modal-instructions">Enter your full registration profile name to verify ownership.</p>
+            
+            <div class="form-group">
+                <label>Your Account Profile Name</label>
+                <input type="text" id="recoveryNameInput" placeholder="John Doe">
+                <button type="button" class="modal-action-btn" id="loadEmailQuestionBtn">Verify Name</button>
+            </div>
+
+            <div id="emailQuestionWrapper" style="display: none; margin-top: 15px;">
+                <div class="form-group">
+                    <label>Security Question:</label>
+                    <p id="displayedEmailQuestion" class="security-question-text"></p>
+                    <input type="text" id="emailAnswerInput" placeholder="Your Answer">
+                </div>
+                <button type="button" class="submit-btn" id="submitEmailRecoveryBtn">Reveal Registered Email</button>
+            </div>
+            <div class="modal-msg" id="emailRecoveryMsg"></div>
+        </div>
+    </div>
+
+    <div id="footer"></div>
+
+    <script src="../Components/Structure_component_css/Structure_component_js/header.js"></script>
+    <script src="../Components/Structure_component_css/Structure_component_js/Footer.js"></script>
+    <script src="../Structure_js/Login.js"></script>
+</body>
+</html>

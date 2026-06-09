@@ -1,0 +1,76 @@
+.main-footer {
+    width: 100%;
+    background: #ffffff;
+    border-top: 1px solid #f0f0f5; /* Subtle, lighter border color */
+    padding: 24px 60px; /* Increased padding for breathing room */
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; /* Modern system font stack */
+    color: #4a4a52; /* Softer corporate gray for better reading comfort */
+    margin-top: auto;
+    box-shadow: 0 -4px 20px rgba(0, 0, 0, 0.02); /* Soft, premium drop shadow */
+    box-sizing: border-box;
+
+    /* Flexbox Alignment */
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    transition: all 0.3s ease;
+}
+
+/* Softer style for copyright information */
+#footer-copy {
+    margin: 0;
+    font-size: 14px;
+    font-weight: 500;
+    letter-spacing: 0.5px;
+    color: #8a8a93; /* Muted gray for secondary importance */
+}
+
+/* Clean, inline link grouping */
+.footer-contact {
+    display: flex;
+    align-items: center;
+    gap: 32px; /* Generous gap for tap targets (user-friendly mobile design) */
+}
+
+/* Uniform paragraph spacing inside contact container */
+.footer-contact p {
+    margin: 0;
+    font-size: 14px;
+    color: #6e6e73;
+    font-weight: 400;
+}
+
+/* High-quality utility links */
+.footer-contact a {
+    color: #5d5fef; /* Brand identity violet color */
+    text-decoration: none;
+    font-weight: 500;
+    padding: 4px 0;
+    border-bottom: 1.5px solid transparent; /* Smooth border anchor for hover transitions */
+    transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Micro-interaction response on hover */
+.footer-contact a:hover {
+    color: #4a4cd9;
+    border-bottom-color: #4a4cd9; /* Modern sleek underline slide effect instead of default browser style */
+}
+
+/* 📱 Responsive break for smaller screen environments (Tablets / Mobile phones) */
+@media (max-width: 850px) {
+    .main-footer {
+        flex-direction: column;
+        gap: 20px;
+        text-align: center;
+        padding: 24px;
+    }
+
+    .footer-contact {
+        flex-direction: column;
+        gap: 12px;
+    }
+    
+    .footer-contact a {
+        border-bottom: none; /* Disable line effects on mobile devices */
+    }
+}

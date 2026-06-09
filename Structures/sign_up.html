@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Shared Workspace - Sign Up</title>
+    <link rel="stylesheet" href="../Components/Structure_component_css/header.css">
+    <link rel="stylesheet" href="../Components/Structure_component_css/Footer.css">
+    <link rel="stylesheet" href="../structure_css/sign_up.css">
+</head>
+<body onload="loadHeader(); loadFooter();">
+
+    <div id="header"></div>
+
+    <main class="form-container">
+        <div class="account-card">
+            <h2>Create your Account</h2>
+            <p class="subtitle">Join Group 8 Workspace Network as an owner or coworker.</p>
+            
+            <form id="signupForm">
+                <div class="form-group">
+                    <label for="userName">Full Name</label>
+                    <input type="text" id="userName" placeholder="John Doe" required>
+                </div>
+                <div class="form-group">
+                    <label for="userEmail">Email Address</label>
+                    <input type="email" id="userEmail" placeholder="john@example.com" required>
+                </div>
+                <div class="form-group">
+                    <label for="userPhone">Phone Number</label>
+                    <input type="tel" id="userPhone" placeholder="403-111-1111" required>
+                </div>
+                <div class="form-group">
+                    <label for="userPassword">Password</label>
+                    <input type="password" id="userPassword" placeholder="••••••••" required>
+                </div>
+                <div class="form-group">
+                    <label for="userRole">I want to:</label>
+                    <select id="userRole">
+                        <option value="coworker">Rent a Workspace (Coworker)</option>
+                        <option value="owner">List my Properties (Owner)</option>
+                    </select>
+                </div>
+
+
+                            <div class="form-group">
+                <label for="signUpQuestion">Security Question (For Account Recovery)</label>
+                <select id="signUpQuestion">
+                    <option value="What was the name of your first pet?">What was the name of your first pet?</option>
+                    <option value="What city were you born in?">What city were you born in?</option>
+                    <option value="What was your first school's name?">What was your first school's name?</option>
+                    <option value="What is your favorite color?">What is your favorite color?</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="signUpAnswer">Answer</label>
+                <input type="text" id="signUpAnswer" placeholder="Your secret answer" required>
+            </div>
+
+
+                <button type="submit" class="submit-btn" id="submitBtn">Sign Up</button>
+                <div class="msg" id="responseMsg"></div>
+            </form>
+        </div>
+    </main>
+
+    <div id="footer"></div>
+
+
+    <script src="../Components/Structure_component_css/Structure_component_js/header.js"></script>
+       <script src="../Components/Structure_component_css/Structure_component_js/Footer.js"></script>
+    
+    <script src="../Structure_js/sign_up.js"></script>
+</body>
+</html>

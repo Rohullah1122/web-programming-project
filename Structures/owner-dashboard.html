@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Owner Dashboard - Manage Workspaces</title>
+    <link rel="stylesheet" href="../Components/Structure_component_css/header.css">
+    <link rel="stylesheet" href="../Components/Structure_component_css/Footer.css">
+    <link rel="stylesheet" href="../structure_css/owner-dashboard.css">
+</head>
+<body onload="loadHeader(); loadFooter();">
+
+    <div id="header"></div>
+
+    <main class="dashboard-container">
+        <header class="dashboard-hero">
+            <h1>Welcome Back, <span id="ownerName">Owner</span>!</h1>
+            <p>Manage your real estate listings and workspace inventory from one central hub.</p>
+        </header>
+
+        <div class="dashboard-grid">
+            <section class="form-section">
+                <div class="management-card">
+                    <h2>List a New Workspace</h2>
+                    <form id="workspaceForm">
+                        <div class="form-group">
+                            <label for="propertyName">Property/Building Name</label>
+                            <input type="text" id="propertyName" placeholder="e.g., Downtown Innovation Hub" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="propertyAddress">Street Address</label>
+                            <input type="text" id="propertyAddress" placeholder="e.g., 123 Main Street" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="propertyNeighborhood">Neighborhood / Area</label>
+                            <input type="text" id="propertyNeighborhood" placeholder="e.g., Downtown Core" required>
+                        </div>
+                        
+            
+                        <div class="form-row">
+                                <div class="form-group">
+                                    <label>Building Image (Exterior/Lobby)</label>
+                                    <label for="buildingImage" class="custom-file-upload">
+                                        <span class="upload-icon">🏢</span>
+                                        <span class="upload-text">Select Building Photo</span>
+                                        <span class="file-name-preview" id="buildingNamePreview">No file selected</span>
+                                    </label>
+                                    <input type="file" id="buildingImage" accept="image/*" required 
+                                        onchange="document.getElementById('buildingNamePreview').innerText = this.files[0] ? this.files[0].name : 'No file selected'">
+                                </div>
+                                
+                                <div class="form-group">
+                                    <label>Workspace Image (Room/Hall/Desk)</label>
+                                    <label for="roomImage" class="custom-file-upload">
+                                        <span class="upload-icon">🛋️</span>
+                                        <span class="upload-text">Select Workspace Photo</span>
+                                        <span class="file-name-preview" id="roomNamePreview">No file selected</span>
+                                    </label>
+                                    <input type="file" id="roomImage" accept="image/*" required 
+                                        onchange="document.getElementById('roomNamePreview').innerText = this.files[0] ? this.files[0].name : 'No file selected'">
+                                </div>
+                            </div>
+
+
+
+
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="workspaceType">Workspace Type</label>
+                                <select id="workspaceType">
+                                    <option value="Desk">Hot Desk</option>
+                                    <option value="Private Office">Private Office</option>
+                                    <option value="Meeting Room">Meeting Room</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label for="workspaceCapacity">Capacity (Seats)</label>
+                                <input type="number" id="workspaceCapacity" min="1" placeholder="4" required>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="workspacePrice">Price per Hour ($)</label>
+                            <input type="number" id="workspacePrice" min="0" placeholder="25" required>
+                        </div>
+                        
+                        <button type="submit" class="submit-btn" id="addWorkspaceBtn">Publish Listing</button>
+                    </form>
+                </div>
+            </section>
+
+            <section class="inventory-section">
+                <h2>Your Active Listings</h2>
+                <div class="inventory-grid" id="inventoryGrid">
+                    </div>
+                <div class="empty-state" id="emptyState">
+                    <p>You haven't added any workspace listings yet. Use the form to get started!</p>
+                </div>
+            </section>
+        </div>
+    </main>
+
+    <div id="footer"></div>
+
+    <script src="../Components/Structure_component_css/Structure_component_js/header.js"></script>
+    <script src="../Components/Structure_component_css/Structure_component_js/Footer.js"></script>
+    
+    <script src="../Structure_js/owner-dashboard.js"></script>
+</body>
+</html>

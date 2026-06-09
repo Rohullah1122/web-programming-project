@@ -1,0 +1,122 @@
+/* Container forces the footer to sit perfectly on the bottom of short pages */
+html, body {
+    height: 100%;
+    margin: 0;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    background-color: #fcfcfd;
+}
+
+body {
+    display: flex;
+    flex-direction: column;
+}
+
+/* Centers the authentication card beautifully on screen space */
+.form-container {
+    flex: 1 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 60px 20px;
+    box-sizing: border-box;
+}
+
+/* Clean, modern minimalist paper card frame layout design */
+.account-card {
+    background: #ffffff;
+    padding: 40px;
+    border-radius: 12px;
+    width: 100%;
+    max-width: 460px;
+    box-shadow: 0 4px 24px rgba(0, 0, 0, 0.02);
+    border: 1px solid #f0f0f5;
+    box-sizing: border-box;
+}
+
+.account-card h2 {
+    margin: 0 0 6px 0;
+    color: #1c1c1e;
+    font-size: 24px;
+    font-weight: 600;
+    letter-spacing: -0.3px;
+}
+
+.subtitle {
+    margin: 0 0 28px 0;
+    color: #8e8e93;
+    font-size: 14px;
+    line-height: 1.4;
+}
+
+.form-group {
+    margin-bottom: 20px;
+    text-align: left;
+}
+
+.form-group label {
+    display: block;
+    font-size: 13.5px;
+    font-weight: 500;
+    color: #48484a;
+    margin-bottom: 8px;
+}
+
+/* Inputs and drop-down selectors styled identically */
+.form-group input, 
+.form-group select {
+    width: 100%;
+    padding: 12px 14px;
+    border: 1px solid #e5e5ea;
+    border-radius: 8px;
+    font-size: 15px;
+    color: #1c1c1e;
+    background-color: #ffffff;
+    box-sizing: border-box;
+    transition: all 0.2s ease;
+}
+
+/* Active focus fields light up using your cohesive violet brand tint accent color */
+.form-group input:focus, 
+.form-group select:focus {
+    border-color: #5d5fef;
+    outline: none;
+    box-shadow: 0 0 0 4px rgba(93, 95, 239, 0.12);
+}
+
+/* Call to action form submission buttons layout styling rules */
+.submit-btn {
+    width: 100%;
+    background: #5d5fef;
+    color: #ffffff;
+    border: none;
+    padding: 14px;
+    border-radius: 8px;
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+    margin-top: 10px;
+    box-shadow: 0 4px 12px rgba(93, 95, 239, 0.15);
+    transition: all 0.2s ease;
+}
+
+.submit-btn:hover {
+    background: #4a4cd9;
+    box-shadow: 0 4px 16px rgba(74, 76, 217, 0.25);
+}
+
+.submit-btn:disabled {
+    background: #aeaeaf;
+    cursor: not-allowed;
+    box-shadow: none;
+}
+
+/* Dynamic status notifications configuration definitions */
+.msg {
+    margin-top: 18px;
+    font-size: 14px;
+    text-align: center;
+    font-weight: 500;
+    display: none;
+    padding: 10px;
+    border-radius: 6px;
+}

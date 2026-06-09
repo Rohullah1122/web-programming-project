@@ -1,0 +1,251 @@
+/* ==========================================================================
+   1. GLOBAL PAGE STRUCTURAL DEFAULTS
+   ========================================================================== */
+html, body {
+    height: 100%;
+    margin: 0;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    background-color: #f8f9fc;
+}
+
+body {
+    display: flex;
+    flex-direction: column;
+}
+
+/* ==========================================================================
+   2. CONTENT LAYOUT CONTAINER
+   ========================================================================== */
+.form-container {
+    flex: 1 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 60px 24px;
+    box-sizing: border-box;
+}
+
+/* ==========================================================================
+   3. MODERN MINIMALIST CARD FRAME DESIGN
+   ========================================================================== */
+.account-card {
+    background: #ffffff;
+    padding: 44px 40px;
+    border-radius: 16px;
+    width: 100%;
+    max-width: 440px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.01),
+                0 12px 30px rgba(93, 95, 239, 0.03);
+    border: 1px solid rgba(240, 240, 245, 0.8);
+    box-sizing: border-box;
+}
+
+.account-card h2 {
+    margin: 0 0 8px 0;
+    color: #111112;
+    font-size: 26px;
+    font-weight: 700;
+    letter-spacing: -0.5px;
+}
+
+.subtitle {
+    margin: 0 0 32px 0;
+    color: #86868f;
+    font-size: 14.5px;
+    line-height: 1.5;
+}
+
+/* ==========================================================================
+   4. FORM INPUT FIELDS
+   ========================================================================== */
+.form-group {
+    margin-bottom: 22px;
+    text-align: left;
+}
+
+.form-group label {
+    display: block;
+    font-size: 13.5px;
+    font-weight: 600;
+    color: #42424a;
+    margin-bottom: 8px;
+}
+
+.form-group input {
+    width: 100%;
+    padding: 13px 16px;
+    border: 1px solid #e2e2ea;
+    border-radius: 10px;
+    font-size: 15px;
+    color: #111112;
+    background-color: #ffffff;
+    box-sizing: border-box;
+    transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.form-group input:hover {
+    border-color: #cbd5e1;
+}
+
+.form-group input:focus {
+    border-color: #5d5fef;
+    outline: none;
+    box-shadow: 0 0 0 4px rgba(93, 95, 239, 0.12),
+                0 4px 10px rgba(93, 95, 239, 0.04);
+}
+
+.form-group input::placeholder {
+    color: #b5b5be;
+}
+
+/* ==========================================================================
+   5. BUTTON & LINK ELEMENTS
+   ========================================================================== */
+.submit-btn {
+    width: 100%;
+    background: #5d5fef;
+    color: #ffffff;
+    border: none;
+    padding: 15px;
+    border-radius: 10px;
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+    margin-top: 12px;
+    box-shadow: 0 4px 12px rgba(93, 95, 239, 0.18);
+    transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.submit-btn:hover {
+    background: #4a4cd9;
+    box-shadow: 0 6px 20px rgba(74, 76, 217, 0.28);
+    transform: translateY(-1px);
+}
+
+.submit-btn:active {
+    transform: translateY(0);
+}
+
+.submit-btn:disabled {
+    background: #e2e2ea;
+    color: #92929d;
+    cursor: not-allowed;
+    box-shadow: none;
+    transform: none;
+}
+
+.card-footer {
+    margin-top: 28px;
+    text-align: center;
+    border-top: 1px solid #f0f0f5;
+    padding-top: 20px;
+}
+
+.card-footer p {
+    margin: 0;
+    font-size: 14px;
+    color: #6e6e73;
+}
+
+.card-footer a {
+    color: #5d5fef;
+    text-decoration: none;
+    font-weight: 600;
+}
+
+.card-footer a:hover {
+    text-decoration: underline;
+    color: #4a4cd9;
+}
+
+/* ==========================================================================
+   6. RESPONSIVE STATUS BANNERS & ANIMATIONS
+   ========================================================================== */
+.msg {
+    margin-top: 20px;
+    font-size: 14px;
+    text-align: center;
+    font-weight: 600;
+    display: none;
+    padding: 12px 14px;
+    border-radius: 8px;
+    box-sizing: border-box;
+    animation: loginFadeIn 0.3s ease;
+}
+
+/* Recovery Hyperlinks Layout Alignment Line */
+.recovery-links-row {
+    display: flex;
+    justify-content: space-between;
+    margin: -10px 0 20px 0;
+}
+.recovery-links-row a {
+    font-size: 13px;
+    color: #5d5fef;
+    text-decoration: none;
+    font-weight: 500;
+}
+.recovery-links-row a:hover {
+    text-decoration: underline;
+}
+
+/* Modal Dimmer Windows Background Screen Container Box */
+.recovery-modal {
+    display: none; 
+    position: fixed;
+    top: 0; left: 0; width: 100%; height: 100%;
+    background: rgba(15, 23, 42, 0.6);
+    backdrop-filter: blur(4px);
+    z-index: 1000;
+    align-items: center;
+    justify-content: center;
+}
+.modal-content-card {
+    background: #ffffff;
+    padding: 32px;
+    border-radius: 16px;
+    width: 100%;
+    max-width: 440px;
+    box-shadow: 0 20px 25px -5px rgba(0,0,0,0.1);
+    position: relative;
+    box-sizing: border-box;
+}
+.close-modal-btn {
+    position: absolute;
+    top: 16px; right: 20px;
+    font-size: 24px; color: #64748b;
+    cursor: pointer;
+}
+.modal-instructions {
+    font-size: 13.5px; color: #64748b; margin: -5px 0 20px 0;
+}
+.modal-action-btn {
+    background: #475569; color: #fff; border: none;
+    padding: 10px; width: 100%; margin-top: 8px;
+    border-radius: 8px; font-weight: 600; cursor: pointer;
+}
+.security-question-text {
+    background: #f8fafc; padding: 12px; border-radius: 8px;
+    font-weight: 600; color: #1e293b; border-left: 4px solid #5d5fef;
+}
+.modal-msg {
+    margin-top: 15px; padding: 12px; border-radius: 8px;
+    font-size: 13px; font-weight: 600; text-align: center; display: none;
+}
+
+@keyframes loginFadeIn {
+    from { opacity: 0; transform: translateY(-4px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+@media (max-width: 480px) {
+    .form-container { padding: 30px 16px; }
+    .account-card {
+        padding: 32px 24px;
+        box-shadow: none;
+        border: none;
+        background: transparent;
+    }
+}

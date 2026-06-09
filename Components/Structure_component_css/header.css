@@ -1,0 +1,131 @@
+/* HEADER CONTAINER */
+.main-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 16px 60px; /* Increased padding for an open, luxurious breathing room */
+    background: rgba(255, 255, 255, 0.85); /* Semitransparent white background */
+    backdrop-filter: blur(12px); /* Modern Glassmorphism blur filter */
+    -webkit-backdrop-filter: blur(12px);
+    border-bottom: 1px solid rgba(240, 240, 245, 0.6);
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.02); /* Very soft drop shadow */
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    flex-wrap: wrap; 
+    gap: 20px;
+    box-sizing: border-box;
+    transition: all 0.3s ease;
+}
+
+/* LOGO CONTAINER */
+.logo {
+    display: flex;
+    align-items: center;
+}
+
+.logo img {
+    height: 40px;
+    width: auto;
+    object-fit: contain;
+    display: block;
+    cursor: pointer;
+    filter: drop-shadow(0 2px 4px rgba(0,0,0,0.05));
+    transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Micro-interaction bounce on logo hover */
+.logo img:hover {
+    transform: scale(1.04) rotate(-1deg);
+}
+
+/* NAV LINKS */
+.nav-links {
+    display: flex;
+    align-items: center;
+    gap: 8px; /* Tighter gap because we will use internal link padding instead */
+    flex-wrap: wrap;
+}
+
+.nav-links a {
+    text-decoration: none;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    color: #51515a; /* Sophisticated deep slate text */
+    font-size: 15px;
+    font-weight: 500;
+    letter-spacing: 0.2px;
+    padding: 8px 16px;
+    border-radius: 8px;
+    position: relative; /* Anchor for the custom sliding underline indicator */
+    transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* HOVER EFFECT (Clean pill shape highlight) */
+.nav-links a:hover {
+    background: rgba(93, 95, 239, 0.06); /* Soft tint of your brand violet */
+    color: #5d5fef; /* Brand violet */
+}
+
+/* ACTIVE PAGE STATE (Premium, solid aesthetic) */
+.nav-links a.active {
+    background: #5d5fef; /* Solid brand purple */
+    color: #ffffff;
+    box-shadow: 0 4px 12px rgba(93, 95, 239, 0.25); /* Subtle glow shadow */
+}
+
+/* ⭐ SLOW INTERACTIVE UNDERLINE SLIDE EFFECT FOR REGULAR LINKS (Bonus Aesthetic) */
+.nav-links a:not(.active)::after {
+    content: '';
+    position: absolute;
+    bottom: 2px;
+    left: 50%;
+    width: 0;
+    height: 2px;
+    background-color: #5d5fef;
+    transition: all 0.25s ease;
+    transform: translateX(-50%);
+}
+
+.nav-links a:not(.active):hover::after {
+    width: 30%; /* Smoothly expands an underline indicator directly in the center */
+}
+
+
+/* 📱 RESPONSIVE BREAKPOINTS */
+@media (max-width: 768px) {
+    .main-header {
+        padding: 14px 30px;
+    }
+
+    .nav-links a {
+        font-size: 14px;
+        padding: 6px 12px;
+    }
+
+    .logo img {
+        height: 34px;
+    }
+}
+
+@media (max-width: 576px) {
+    .main-header {
+        flex-direction: column;   
+        align-items: center; /* Center aligning on phones looks like a sleek app shell */
+        padding: 16px 20px;
+        text-align: center;
+    }
+
+    .nav-links {
+        justify-content: center;
+        gap: 4px;
+    }
+
+    .nav-links a {
+        font-size: 13.5px;
+        padding: 6px 10px;
+    }
+    
+    .nav-links a:not(.active):hover::after {
+        display: none; /* Turn off complex lines on small mobile devices to save space */
+    }
+}

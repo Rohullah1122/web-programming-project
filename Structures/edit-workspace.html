@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Edit Workspace - Management Hub</title>
+    <link rel="stylesheet" href="../structure_css/owner-dashboard.css">
+    <style>
+        .edit-container { max-width: 600px; margin: 40px auto; padding: 20px; }
+        .btn-group { display: flex; gap: 15px; margin-top: 20px; }
+        .delete-btn { background-color: #ff4d4d; color: white; border: none; padding: 12px 20px; border-radius: 8px; cursor: pointer; font-weight: bold; flex: 1; }
+        .delete-btn:hover { background-color: #e03333; }
+        .update-btn { background-color: #5d5fef; color: white; border: none; padding: 12px 20px; border-radius: 8px; cursor: pointer; font-weight: bold; flex: 2; }
+        .update-btn:hover { background-color: #4a4cd1; }
+        .cancel-link { display: block; text-align: center; margin-top: 15px; color: #62626a; text-decoration: none; }
+    </style>
+</head>
+<body>
+
+    <main class="edit-container">
+        <div class="management-card">
+            <h2>Modify Workspace Listing</h2>
+            <p>Update your property specifications or permanently remove this listing from the database.</p>
+            
+  <form id="editWorkspaceForm">
+    <div class="form-group">
+        <label for="editName">Property/Building Name</label>
+        <input type="text" id="editName" required>
+    </div>
+    <div class="form-group">
+        <label for="editAddress">Street Address</label>
+        <input type="text" id="editAddress" required>
+    </div>
+    <div class="form-group">
+        <label for="editNeighborhood">Neighborhood / Area</label>
+        <input type="text" id="editNeighborhood" required>
+    </div>
+    
+    <div class="form-row">
+        <div class="form-group">
+            <label>Update Building Image (Optional)</label>
+            <label for="editBuildingImage" class="custom-file-upload" style="border: 1px dashed #dcdcdc; padding: 12px; border-radius: 8px; text-align: center; cursor: pointer; display: block; background: #fafafa;">
+                <span class="upload-icon">🏢</span> <span id="buildingNamePreview" style="font-size: 13px; color: #62626a;">Choose a new file...</span>
+            </label>
+            <input type="file" id="editBuildingImage" accept="image/*" style="display: none;" 
+                   onchange="document.getElementById('buildingNamePreview').innerText = this.files[0] ? this.files[0].name : 'Choose a new file...'">
+        </div>
+        
+        <div class="form-group">
+            <label>Update Workspace Image (Optional)</label>
+            <label for="editRoomImage" class="custom-file-upload" style="border: 1px dashed #dcdcdc; padding: 12px; border-radius: 8px; text-align: center; cursor: pointer; display: block; background: #fafafa;">
+                <span class="upload-icon">🛋️</span> <span id="roomNamePreview" style="font-size: 13px; color: #62626a;">Choose a new file...</span>
+            </label>
+            <input type="file" id="editRoomImage" accept="image/*" style="display: none;" 
+                   onchange="document.getElementById('roomNamePreview').innerText = this.files[0] ? this.files[0].name : 'Choose a new file...'">
+        </div>
+    </div>
+
+    <div class="form-row">
+        <div class="form-group">
+            <label for="editType">Workspace Type</label>
+            <select id="editType">
+                <option value="Desk">Hot Desk</option>
+                <option value="Private Office">Private Office</option>
+                <option value="Meeting Room">Meeting Room</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="editCapacity">Capacity (Seats)</label>
+            <input type="number" id="editCapacity" min="1" required>
+        </div>
+    </div>
+    <div class="form-group">
+        <label for="editPrice">Price per Hour ($)</label>
+        <input type="number" id="editPrice" min="0" required>
+    </div>
+    
+    <div class="btn-group">
+        <button type="button" class="delete-btn" id="deleteBtn">Delete Listing</button>
+        <button type="submit" class="update-btn">Save Changes</button>
+    </div>
+    <a href="owner-dashboard.html" class="cancel-link">← Cancel and Go Back</a>
+</form>
+        </div>
+    </main>
+
+    <script src="../Structure_js/edit-workspace.js"></script>
+</body>
+</html>

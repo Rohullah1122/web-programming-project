@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Explore Workspaces - GROUP 8</title>
+    <link rel="stylesheet" href="../Components/Structure_component_css/header.css">
+    <link rel="stylesheet" href="../Components/Structure_component_css/Footer.css">
+    <link rel="stylesheet" href="../structure_css/browse-workspace.css">
+</head>
+<body onload="loadHeader(); loadFooter();">
+
+    <div id="header"></div>
+
+    <main class="browse-container">
+        <header class="browse-header">
+            <div>
+                <h1>Explore Workspaces</h1>
+                <p class="header-subtitle">Find premium productivity environments nearby</p>
+            </div>
+            <a href="login.html" id="authPromptBtn" class="auth-prompt-btn">Sign In</a>
+        </header>
+
+        <section class="search-wrapper-box">
+            <div class="search-input-container">
+                <span class="search-icon">🔍</span>
+                <input type="text" id="workspaceSearchInput" placeholder="Search by name, address, neighborhood, or workspace type...">
+                
+                <div id="searchSuggestionsBox" class="search-suggestions-dropdown"></div>
+            </div>
+        </section>
+
+        <section id="publicExploreGrid" class="explore-instagram-grid"></section>
+
+        <section id="publicEmptyState" class="empty-state">
+            <p id="emptyStateText">No workspaces have been listed yet. Check back soon!</p>
+        </section>
+    </main>
+
+    <div id="footer"></div>
+
+    <script src="../Components/Structure_component_css/Structure_component_js/header.js"></script>
+    <script src="../Components/Structure_component_css/Structure_component_js/Footer.js"></script>
+    <script src="../Structure_js/browse-workspace.js"></script>
+</body>
+</html>
