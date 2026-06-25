@@ -20,73 +20,132 @@
 
         <div class="dashboard-grid">
             <section class="form-section">
-                <div class="management-card">
-                    <h2>List a New Workspace</h2>
-                    <form id="workspaceForm">
-                        <div class="form-group">
-                            <label for="propertyName">Property/Building Name</label>
-                            <input type="text" id="propertyName" placeholder="e.g., Downtown Innovation Hub" required>
-                        </div>
-                        <div class="form-group">
-                            <label for="propertyAddress">Street Address</label>
-                            <input type="text" id="propertyAddress" placeholder="e.g., 123 Main Street" required>
-                        </div>
-                        <div class="form-group">
-                            <label for="propertyNeighborhood">Neighborhood / Area</label>
-                            <input type="text" id="propertyNeighborhood" placeholder="e.g., Downtown Core" required>
-                        </div>
-                        
-            
-                        <div class="form-row">
-                                <div class="form-group">
-                                    <label>Building Image (Exterior/Lobby)</label>
-                                    <label for="buildingImage" class="custom-file-upload">
-                                        <span class="upload-icon">🏢</span>
-                                        <span class="upload-text">Select Building Photo</span>
-                                        <span class="file-name-preview" id="buildingNamePreview">No file selected</span>
-                                    </label>
-                                    <input type="file" id="buildingImage" accept="image/*" required 
-                                        onchange="document.getElementById('buildingNamePreview').innerText = this.files[0] ? this.files[0].name : 'No file selected'">
-                                </div>
-                                
-                                <div class="form-group">
-                                    <label>Workspace Image (Room/Hall/Desk)</label>
-                                    <label for="roomImage" class="custom-file-upload">
-                                        <span class="upload-icon">🛋️</span>
-                                        <span class="upload-text">Select Workspace Photo</span>
-                                        <span class="file-name-preview" id="roomNamePreview">No file selected</span>
-                                    </label>
-                                    <input type="file" id="roomImage" accept="image/*" required 
-                                        onchange="document.getElementById('roomNamePreview').innerText = this.files[0] ? this.files[0].name : 'No file selected'">
-                                </div>
-                            </div>
+    <div class="management-card">
+        <h2>List a New Workspace</h2>
+        <form id="workspaceForm">
 
+            <!-- PROPERTY INFO -->
+            <div class="form-group">
+                <label for="propertyName">Property/Building Name</label>
+                <input type="text" id="propertyName" placeholder="e.g., Downtown Innovation Hub" required>
+            </div>
 
+            <div class="form-group">
+                <label for="propertyAddress">Street Address</label>
+                <input type="text" id="propertyAddress" placeholder="e.g., 123 Main Street" required>
+            </div>
 
+            <div class="form-group">
+                <label for="propertyNeighborhood">Neighborhood / Area</label>
+                <input type="text" id="propertyNeighborhood" placeholder="e.g., Downtown Core" required>
+            </div>
 
-                        <div class="form-row">
-                            <div class="form-group">
-                                <label for="workspaceType">Workspace Type</label>
-                                <select id="workspaceType">
-                                    <option value="Desk">Hot Desk</option>
-                                    <option value="Private Office">Private Office</option>
-                                    <option value="Meeting Room">Meeting Room</option>
-                                </select>
-                            </div>
-                            <div class="form-group">
-                                <label for="workspaceCapacity">Capacity (Seats)</label>
-                                <input type="number" id="workspaceCapacity" min="1" placeholder="4" required>
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label for="workspacePrice">Price per Hour ($)</label>
-                            <input type="number" id="workspacePrice" min="0" placeholder="25" required>
-                        </div>
-                        
-                        <button type="submit" class="submit-btn" id="addWorkspaceBtn">Publish Listing</button>
-                    </form>
+             <div class="form-group">
+                <label for="City">City</label>
+                <input type="text" id="City" placeholder="City" required>
+            </div>
+
+            <!-- NEW PROPERTY FIELDS -->
+            <div class="form-row">
+                <div class="form-group">
+                    <label for="propertySqft">Square Footage (sqft)</label>
+                    <input type="number" id="propertySqft" placeholder="e.g., 1200" required>
                 </div>
-            </section>
+
+                <div class="form-group">
+                    <label for="propertyGarage">Garage Available?</label>
+                    <select id="propertyGarage" required>
+                        <option value="Yes">Yes</option>
+                        <option value="No">No</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="propertyTransport">Public Transport Access?</label>
+                    <select id="propertyTransport" required>
+                        <option value="Yes">Yes</option>
+                        <option value="No">No</option>
+                    </select>
+                </div>
+            </div>
+
+            <!-- IMAGES -->
+            <div class="form-row">
+                <div class="form-group">
+                    <label>Building Image (Exterior/Lobby)</label>
+                    <label for="buildingImage" class="custom-file-upload">
+                        <span class="upload-icon">🏢</span>
+                        <span class="upload-text">Select Building Photo</span>
+                        <span class="file-name-preview" id="buildingNamePreview">No file selected</span>
+                    </label>
+                    <input type="file" id="buildingImage" accept="image/*" required>
+                </div>
+
+                <div class="form-group">
+                    <label>Workspace Image (Room/Hall/Desk)</label>
+                    <label for="roomImage" class="custom-file-upload">
+                        <span class="upload-icon">🛋️</span>
+                        <span class="upload-text">Select Workspace Photo</span>
+                        <span class="file-name-preview" id="roomNamePreview">No file selected</span>
+                    </label>
+                    <input type="file" id="roomImage" accept="image/*" required>
+                </div>
+            </div>
+
+            <!-- WORKSPACE INFO -->
+            <div class="form-row">
+                <div class="form-group">
+                    <label for="workspaceType">Workspace Type</label>
+                    <select id="workspaceType">
+                        <option value="Hot Desk">Hot Desk</option>
+                        <option value="Private Office">Private Office</option>
+                        <option value="Meeting Room">Meeting Room</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="workspaceCapacity">Capacity (Seats)</label>
+                    <input type="number" id="workspaceCapacity" min="1" placeholder="4" required>
+                </div>
+            </div>
+
+            <!-- NEW WORKSPACE FIELDS -->
+            <div class="form-row">
+                <div class="form-group">
+                    <label for="workspaceSmoking">Smoking Allowed?</label>
+                    <select id="workspaceSmoking" required>
+                        <option value="No">No</option>
+                        <option value="Yes">Yes</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="workspaceAvailability">Availability</label>
+                    <input type="date" id="workspaceAvailability" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="workspaceTerm">Term</label>
+                    <select id="workspaceTerm" required>
+                        <option value="Daily">Daily</option>
+                        <option value="Weekly">Weekly</option>
+                        <option value="Monthly">Monthly</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="workspacePrice">Price per Hour ($)</label>
+                <input type="number" id="workspacePrice" min="0" placeholder="25" required>
+            </div>
+
+            <button type="submit" class="submit-btn" id="addWorkspaceBtn">Publish Listing</button>
+            <p id="formMsg" class="form-message"></p>
+
+        </form>
+    </div>
+</section>
+
 
             <section class="inventory-section">
                 <h2>Your Active Listings</h2>

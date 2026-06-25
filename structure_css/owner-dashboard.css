@@ -509,3 +509,42 @@ body {
     font-weight: 500;
     color: #86868f;
 }
+
+
+.action-buttons {
+    display: flex;
+    gap: 10px;
+}
+
+.edit-btn,
+.delete-btn {
+    padding: 8px 14px;
+    border-radius: 8px;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    border: none;
+    transition: 0.2s ease;
+}
+
+/* EDIT BUTTON */
+.edit-btn {
+    background-color: #5d5fef;
+    color: white;
+}
+
+.edit-btn:hover {
+    background-color: #4a4cd1;
+    transform: translateY(-2px);
+}
+
+/* DELETE BUTTON */
+.delete-btn {
+    background-color: #ff4d4d;
+    color: white;
+}
+
+.delete-btn:hover {
+    background-color: #d93636;
+    transform: translateY(-2px);
+}

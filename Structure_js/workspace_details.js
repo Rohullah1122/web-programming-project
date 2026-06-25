@@ -1,116 +1,195 @@
-document.addEventListener("DOMContentLoaded", () => {
+document.addEventListener("DOMContentLoaded", async () => {
     const detailsWrapper = document.getElementById("detailsWrapper");
     if (!detailsWrapper) return;
-    
-    // 1. Get the workspace ID from URL parameters
+
+    // 1. Get workspace ID from URL
     const urlParams = new URLSearchParams(window.location.search);
-    const spaceId = urlParams.get('id');
-    
-    // 2. Safely parse data matching your exact localStorage keys
-    let allWorkspaces = [];
-    let allUsers = [];
-    try {
-        allWorkspaces = JSON.parse(localStorage.getItem("workspacesData")) || [];
-        // FIXED: Using 'usersData' instead of 'users' to match your application storage precisely
-        allUsers = JSON.parse(localStorage.getItem("usersData")) || [];
-    } catch (e) {
-        console.error("Error reading localStorage systems mapping arrays:", e);
-    }
-    
-    // 3. Find target workspace item
-    const selectedSpace = allWorkspaces.find(item => String(item.id) === String(spaceId));
-    
-    if (!selectedSpace) {
+    const spaceId = urlParams.get("id");
+
+    if (!spaceId) {
         detailsWrapper.innerHTML = `
-            <div style="grid-column: span 2; text-align:center; padding: 40px; color:#d32f2f; background: #fff; border-radius: 8px;">
-                <h3>Error: Workspace listing could not be resolved or found.</h3>
-                <p style="color: #666;">Could not locate a workspace with ID: <strong>${spaceId}</strong></p>
-                <a href="browse-workspaces.html" style="color: #5d5fef; text-decoration: none; font-weight: bold;">Return to Catalog</a>
+            <div class="error-state-card">
+                <h3>Invalid Workspace</h3>
+                <p>No workspace ID was provided.</p>
+                <a href="browse-workspaces.html" class="error-btn">Return to Catalog</a>
             </div>`;
         return;
     }
 
-    // 4. Resolve owner profile using ownerId pointer reference matching
-    const spaceOwner = allUsers.find(user => String(user.id) === String(selectedSpace.ownerId)) || {};
+    try {
+        // 2. Fetch workspace from backend
+        const wsRes = await fetch(`http://localhost:4000/api/workspaces/${spaceId}`);
+        const workspace = await wsRes.json();
 
-    // 5. Build presentation variables safely (handling fallback data configurations)
-    const name = selectedSpace.name || "Premium Workspace";
-    const type = selectedSpace.type || "Workspace";
-    const price = selectedSpace.price || "0";
-    const address = selectedSpace.address || "Calgary, AB";
-    const neighborhood = selectedSpace.neighborhood || "Downtown Core";
-    const capacity = selectedSpace.capacity || "Seats Available";
-    
-    // Read the base64 image strings directly from your workspacesData payload
-    const buildingImg = selectedSpace.buildingImage || 'https://images.unsplash.com/photo-1497366216548-37526070297c?auto=format&fit=crop&w=600&q=80';
-    const roomImg = selectedSpace.roomImage || 'https://images.unsplash.com/photo-1497215728101-856f4ea42174?auto=format&fit=crop&w=600&q=80';
+        if (!wsRes.ok) {
+            detailsWrapper.innerHTML = `
+                <div class="error-state-card">
+                    <h3>Workspace Not Found</h3>
+                    <p>This workspace may have been removed.</p>
+                    <a href="browse-workspaces.html" class="error-btn">Return to Catalog</a>
+                </div>`;
+            return;
+        }
 
-    // Fallback contact values if specific fields are unpopulated inside usersData array matrix
-    const ownerName = spaceOwner.name || selectedSpace.ownerName || "Independent Representative";
-    const ownerEmail = spaceOwner.email || selectedSpace.ownerEmail || "group8@gmail.com";
-    const ownerPhone = spaceOwner.phone || selectedSpace.ownerPhone || "403-111-1111";
+        // 3. Fetch property
+        const propRes = await fetch(`http://localhost:4000/api/properties/${workspace.property_id}`);
+        const property = await propRes.json();
 
-    // 6. Inject the dynamic component cards layout to structural viewport
-    detailsWrapper.innerHTML = `
-        <div class="main-showcase-card">
-            <div class="gallery-row">
-                <img src="${buildingImg}" alt="Exterior Structure Showcase" onerror="this.src='https://via.placeholder.com/300?text=Building+Photo'">
-                <img src="${roomImg}" alt="Interior Workspace Setup" onerror="this.src='https://via.placeholder.com/300?text=Interior+Photo'">
-            </div>
-            
-            <div class="workspace-title-row">
-                <div>
-                    <h1>${name}</h1>
-                    <span style="color:#8e8e93; font-size:14px; text-transform: uppercase; font-weight: bold; letter-spacing: 0.5px;">Type: ${type}</span>
+        // 4. Fetch owner (optional)
+        let owner = {};
+        try {
+            const ownerRes = await fetch(`http://localhost:4000/api/users/${property.owner_id}`);
+            if (ownerRes.ok) owner = await ownerRes.json();
+        } catch (e) {
+            owner = {};
+        }
+
+        // 5. Resolve owner info
+        const resolvedOwnerName = owner.name || "Property Representative";
+        const resolvedOwnerEmail = owner.email || "group8@gmail.com";
+        const resolvedOwnerPhone = owner.phone || "403-111-1111";
+
+        // 6. Render full details
+        detailsWrapper.innerHTML = `
+            <div class="main-showcase-card">
+                <div class="gallery-row">
+                    <div class="img-wrapper">
+                        <span class="img-badge">Exterior</span>
+                        <img src="${property.building_image}" alt="Building Exterior">
+                    </div>
+                    <div class="img-wrapper">
+                        <span class="img-badge">Interior</span>
+                        <img src="${workspace.room_image}" alt="Workspace Interior">
+                    </div>
                 </div>
-                <div class="price-badge">$${price}<span>/hr</span></div>
+
+                <div class="workspace-header-block">
+                    <span class="type-pill">${workspace.type}</span>
+                    <h1>${workspace.name}</h1>
+                </div>
+
+                <h3 class="section-subtitle">Workspace Overview</h3>
+                <div class="spec-list">
+
+                    <div class="spec-item">
+                        <div class="spec-icon">📍</div>
+                        <div class="spec-text">
+                            <div class="spec-label">Street Address</div>
+                            <div class="spec-value">${property.address}</div>
+                        </div>
+                    </div>
+
+                    <div class="spec-item">
+                        <div class="spec-icon">🏙️</div>
+                        <div class="spec-text">
+                            <div class="spec-label">Area</div>
+                            <div class="spec-value">${property.city}</div>
+                        </div>
+                    </div>
+
+                    <div class="spec-item">
+                        <div class="spec-icon">📐</div>
+                        <div class="spec-text">
+                            <div class="spec-label">Square Footage</div>
+                            <div class="spec-value">${property.sqft} sqft</div>
+                        </div>
+                    </div>
+
+                    <div class="spec-item">
+                        <div class="spec-icon">🚗</div>
+                        <div class="spec-text">
+                            <div class="spec-label">Garage</div>
+                            <div class="spec-value">${property.garage}</div>
+                        </div>
+                    </div>
+
+                    <div class="spec-item">
+                        <div class="spec-icon">🚉</div>
+                        <div class="spec-text">
+                            <div class="spec-label">Public Transport</div>
+                            <div class="spec-value">${property.transport}</div>
+                        </div>
+                    </div>
+
+                    <div class="spec-item">
+                        <div class="spec-icon">🪑</div>
+                        <div class="spec-text">
+                            <div class="spec-label">Capacity</div>
+                            <div class="spec-value">${workspace.capacity} seats</div>
+                        </div>
+                    </div>
+
+                    <div class="spec-item">
+                        <div class="spec-icon">🚬</div>
+                        <div class="spec-text">
+                            <div class="spec-label">Smoking Allowed</div>
+                            <div class="spec-value">${workspace.smoking}</div>
+                        </div>
+                    </div>
+
+                    <div class="spec-item">
+                        <div class="spec-icon">📅</div>
+                        <div class="spec-text">
+                            <div class="spec-label">Availability</div>
+                            <div class="spec-value">${workspace.availability}</div>
+                        </div>
+                    </div>
+
+                    <div class="spec-item">
+                        <div class="spec-icon">📆</div>
+                        <div class="spec-text">
+                            <div class="spec-label">Term</div>
+                            <div class="spec-value">${workspace.term}</div>
+                        </div>
+                    </div>
+
+                </div>
             </div>
 
-            <div class="spec-list">
-                <div class="spec-item">
-                    <div class="spec-label">📍 Street Address</div>
-                    <div class="spec-value">${address}</div>
+            <div class="owner-sidebar-card">
+                <div class="price-header">
+                    <div class="price-amount">$${workspace.price_per_hour} <span class="price-unit">/ hour</span></div>
                 </div>
-                <div class="spec-item">
-                    <div class="spec-label">🏙️ Neighborhood / Area</div>
-                    <div class="spec-value">${neighborhood}</div>
-                </div>
-                <div class="spec-item">
-                    <div class="spec-label">🪑 Seating Capacity</div>
-                    <div class="spec-value">${capacity} Desk Spaces</div>
-                </div>
-            </div>
-        </div>
 
-        <div class="owner-sidebar-card">
-            <h2>Listed by Property Owner</h2>
-            <div style="font-weight: 600; color: #1c1c1e; margin-bottom: 15px; font-size: 16px;">
-                👤 ${ownerName}
-            </div>
-            
-            <div class="contact-row">
-                <span class="contact-icon">📧</span>
-                <div>
-                    <div style="font-size:11px; color:#8e8e93; font-weight:600;">EMAIL ADDRESS</div>
-                    <a href="mailto:${ownerEmail}" style="color:#5d5fef; text-decoration:none; font-weight: 500;">
-                        ${ownerEmail}
-                    </a>
+                <div class="owner-profile-box">
+                    <div class="owner-avatar">${resolvedOwnerName.charAt(0).toUpperCase()}</div>
+                    <div class="owner-meta">
+                        <div class="owner-title">Listed by Owner</div>
+                        <div class="owner-name">${resolvedOwnerName}</div>
+                    </div>
                 </div>
-            </div>
 
-            <div class="contact-row">
-                <span class="contact-icon">📞</span>
-                <div>
-                    <div style="font-size:11px; color:#8e8e93; font-weight:600;">PHONE NUMBER</div>
-                    <a href="tel:${ownerPhone}" style="color:#1c1c1e; text-decoration:none; font-weight:500;">
-                        ${ownerPhone}
-                    </a>
+                <div class="contact-channels">
+                    <div class="channel-row">
+                        <span class="channel-icon">📧</span>
+                        <div class="channel-data">
+                            <label>Email</label>
+                            <a href="mailto:${resolvedOwnerEmail}">${resolvedOwnerEmail}</a>
+                        </div>
+                    </div>
+
+                    <div class="channel-row">
+                        <span class="channel-icon">📞</span>
+                        <div class="channel-data">
+                            <label>Phone</label>
+                            <a href="tel:${resolvedOwnerPhone}">${resolvedOwnerPhone}</a>
+                        </div>
+                    </div>
                 </div>
-            </div>
 
-            <a href="mailto:${ownerEmail}?subject=Inquiry regarding ${encodeURIComponent(name)}" class="contact-action-btn">
-                Book This Space Via Email
-            </a>
-        </div>
-    `;
+                <a href="mailto:${resolvedOwnerEmail}?subject=Workspace Inquiry: ${encodeURIComponent(workspace.name)}" 
+                   class="contact-action-btn">
+                    Contact Owner
+                </a>
+            </div>
+        `;
+    } catch (err) {
+        console.error("Details load error:", err);
+        detailsWrapper.innerHTML = `
+            <div class="error-state-card">
+                <h3>Error Loading Workspace</h3>
+                <p>Something went wrong while loading this workspace.</p>
+                <a href="browse-workspaces.html" class="error-btn">Return to Catalog</a>
+            </div>`;
+    }
 });
